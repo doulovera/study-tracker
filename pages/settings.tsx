@@ -1,9 +1,8 @@
+import React from 'react'
 import Head from 'next/head'
-import { Card } from '../components/shared/card'
 import { Input } from '../components/shared/input'
 import { Button } from '../components/shared/button'
 import { useLocalStorage } from '../hooks/useLocalStorage'
-import React from 'react'
 
 type FormInputs = {
   calendarId: { value: string };
@@ -27,11 +26,14 @@ export default function Settings () {
   return (
     <>
       <Head>
-        <title>Courses</title>
+        <title>Settings</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="max-w-[900px] w-4/5 mt-10 mx-auto">
-        <Card title="Settings">
+      <div className="grid place-items-center min-h-[80%]">
+        <div className="w-4/5 p-4 bg-slate-600 rounded-xl">
+        <h3 className="mt-2 mb-6 text-center text-2xl font-bold">
+          Settings
+        </h3>
           <form onSubmit={handleSubmit}>
             <div className="mt-4">
               <Input
@@ -56,7 +58,7 @@ export default function Settings () {
               Save
             </Button>
           </form>
-        </Card>
+        </div>
       </div>
     </>
   )

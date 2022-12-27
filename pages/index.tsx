@@ -35,7 +35,7 @@ export default function Home () {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="grid place-items-center h-4/5">
+      <div className="grid place-items-center min-h-[80%]">
         <ActionCard />
         <div className="flex flex-wrap gap-3 justify-center w-full mt-5">
           {

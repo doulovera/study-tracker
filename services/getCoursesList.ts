@@ -5,9 +5,14 @@ type Course = { properties: any, url: string, created_time: string }
 type Types = 'uncompleted' | 'completed' | 'all'
 
 export const fetchCourseList = async (databaseId: string, type: Types) => {
-  const res = await fetch(`/api/courses?databaseId=${databaseId}&type=${type}`)
-  const data = await res.json()
-  return data
+  try {
+    const res = await fetch(`/api/courses?databaseId=${databaseId}&type=${type}`)
+    const data = await res.json()
+    if (!res.ok) throw new Error(data.message)
+    return data
+  } catch (error: Error | any) {
+    throw new Error(error)
+  }
 }
 
 // TODO

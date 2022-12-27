@@ -6,7 +6,7 @@ import { Select } from '../shared/select'
 export function InputGroup () {
   const [coursesDbId] = useLocalStorage('coursesId', '')
 
-  const { data, isFetching } = useQuery({
+  const { data, isFetching, isError, error } = useQuery({
     queryKey: ['courses'],
     queryFn: () => fetchCourseList(coursesDbId, 'uncompleted'),
     initialData: { data: [] }
@@ -24,6 +24,19 @@ export function InputGroup () {
       options: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10']
     }
   ]
+
+  if (isError) {
+    return (
+    <div>
+      <p className="text-red-500">
+        {(error as Error).message}
+      </p>
+      <p>
+        Check the calendarDbId or courseDbId in Settings
+      </p>
+    </div>
+    )
+  }
 
   return (
     <div className={`flex gap-2 flex-col sm:flex-row ${isFetching ? 'opacity-40' : ''}`}>
