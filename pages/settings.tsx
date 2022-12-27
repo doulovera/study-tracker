@@ -31,9 +31,9 @@ export default function Settings () {
       </Head>
       <div className="grid place-items-center min-h-[80%]">
         <div className="w-4/5 p-4 bg-slate-600 rounded-xl">
-        <h3 className="mt-2 mb-6 text-center text-2xl font-bold">
-          Settings
-        </h3>
+          <h3 className="mt-2 mb-6 text-center text-2xl font-bold">
+            Settings
+          </h3>
           <form onSubmit={handleSubmit}>
             <div className="mt-4">
               <Input

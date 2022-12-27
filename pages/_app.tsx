@@ -18,7 +18,7 @@ export default function App ({ Component, pageProps }: AppProps) {
     <QueryClientProvider client={queryClient}>
       <Hydrate state={pageProps.dehydratedState}>
         <MainLayout>
-          <main className="h-full">
+          <main className="h-full overflow-y-auto p-2">
             <div className="max-w-3xl w-4/5 min-w-[300px] mx-auto h-full">
               <Component {...pageProps} />
             </div>
