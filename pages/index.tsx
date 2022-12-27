@@ -1,5 +1,30 @@
 import Head from 'next/head'
 import { ActionCard } from '../components/home/ActionCard'
+import { InfoCard } from '../components/shared/info-card'
+import { Clock, GraduationCap } from 'phosphor-react'
+
+const objectives = [
+  {
+    title: 'Horas cumplidas',
+    color: 'bg-blue-600',
+    icon: Clock,
+    value: (
+      <>
+        30 <span className="text-gray-400">/ 310</span>
+      </>
+    )
+  },
+  {
+    title: 'Cursos completados',
+    color: 'bg-green-600',
+    icon: GraduationCap,
+    value: (
+      <>
+        10 <span className="text-gray-400">/ 100</span>
+      </>
+    )
+  }
+]
 
 export default function Home () {
   return (
@@ -12,6 +37,20 @@ export default function Home () {
       </Head>
       <div className="grid place-items-center h-4/5">
         <ActionCard />
+        <div className="flex flex-wrap gap-3 justify-center w-full mt-5">
+          {
+            objectives.map((item, index) => (
+              <div key={index} className="w-2/5 min-w-[260px] mb-2">
+                <InfoCard
+                  icon={item.icon}
+                  title={item.title}
+                  value={item.value}
+                  color={item.color as `bg-${string}-${number}`}
+                />
+              </div>
+            ))
+          }
+        </div>
       </div>
     </>
   )

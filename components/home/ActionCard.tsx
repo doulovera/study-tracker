@@ -1,11 +1,9 @@
-import { Card } from '../shared/card'
-import { Button } from '../shared/button'
-import { Select } from '../shared/select'
-import { ArrowSquareOut, SmileyWink } from 'phosphor-react'
-import { useMutation, useQuery } from '@tanstack/react-query'
-import { addStudyDay } from '../../services/addStudyDay'
 import React from 'react'
-import { fetchCourseList } from '../../services/getCoursesList'
+import { ArrowSquareOut, SmileyWink } from 'phosphor-react'
+import { useMutation } from '@tanstack/react-query'
+import { Button } from '../shared/button'
+import { InputGroup } from './InputGroup'
+import { addStudyDay } from '../../services/addStudyDay'
 import { useLocalStorage } from '../../hooks/useLocalStorage'
 
 type FormInputs = {
@@ -14,14 +12,7 @@ type FormInputs = {
 }
 
 export function ActionCard () {
-  const [coursesDbId] = useLocalStorage('coursesId', '')
   const [calendarDbId] = useLocalStorage('calendarId', '')
-
-  const { data, isFetching } = useQuery({
-    queryKey: ['courses'],
-    queryFn: () => fetchCourseList(coursesDbId, 'uncompleted'),
-    initialData: {}
-  })
 
   const currentDate = new Date()
 
@@ -43,32 +34,13 @@ export function ActionCard () {
   }
 
   return (
-    <div className="max-w-[598px] w-4/5 mt-6">
-      <Card title="📝 ¿Has estudiado hoy?">
-        <form className="flex flex-col gap-6" onSubmit={handleSubmit}>
-          <h3 className="my-8 text-center text-5xl font-bold font-mono">
-            {formattedDate}
-          </h3>
-          <div>
-            {
-              isFetching
-                ? null
-                : (
-                <>
-                  <Select
-                    name="course"
-                    label="Curso"
-                    options={data.data?.map((course: any) => course.name)}
-                  />
-                  <Select
-                    name="hours"
-                    label="Horas"
-                    options={['0', '1', '2', '3', '4', '5', '+6']}
-                  />
-                </>
-                  )
-            }
-          </div>
+    <div className="w-full">
+      <h3 className="my-8 text-center text-5xl font-bold font-mono">
+        {formattedDate}
+      </h3>
+      <form className="flex flex-col gap-6" onSubmit={handleSubmit}>
+        <div className="p-4 bg-slate-600 rounded-xl">
+          <InputGroup />
           <div className="flex flex-col gap-5 mt-6">
             <Button isLoading={isLoading} type="submit">
               <span className="flex justify-center items-center gap-2">
@@ -83,15 +55,17 @@ export function ActionCard () {
                 </div>
               )
             }
-            <Button outlined>
-              <span className="flex justify-center items-center gap-2">
-                Ir a Notion
-                <ArrowSquareOut size={18} />
-              </span>
-            </Button>
+            <div className="text-center">
+              <a href="https://doulovera.com/" className="inline-block text-gray-200 underline hover:no-underline" target="_blank" rel="noreferrer">
+                <span className="flex justify-center items-center gap-1">
+                  Ir a Notion
+                  <ArrowSquareOut size={18} />
+                </span>
+              </a>
+            </div>
           </div>
-        </form>
-      </Card>
+        </div>
+      </form>
     </div>
   )
 }
